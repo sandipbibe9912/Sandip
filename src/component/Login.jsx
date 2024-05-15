@@ -49,7 +49,7 @@ const Login = () => {
           icon={faLock}
           style={{ fontSize: "40px", color: "#d4910f" }}
         />
-        <h3 className="bg-light fw-bold">Login</h3>
+        <h3 className="bg-light fw-bold">Logins</h3>
         <div className=" d-flex flex-column  justify-content-left ">
           <h5 style={{ marginRight: "30px", color: "#3d3c3c" }}>Email</h5>
           <input
