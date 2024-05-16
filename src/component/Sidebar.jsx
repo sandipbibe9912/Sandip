@@ -21,7 +21,7 @@ const Sidebar = () => {
     path: "/add-user"
    },
    {
-    id: 3,
+    id: 4,
     name: "User List",
     path: "/user-list"
    },
@@ -29,22 +29,23 @@ const Sidebar = () => {
 
   ]
   
-  const [isHovered , setIsHovered] = useState(false)
-  const handleMouseEnter = (index) => {
-    setIsHovered(index)
-  }
-  const handleMouseLeave = () => {
-    setIsHovered(false)
-  }
+ const [isHovered , setIsHovered] = useState(false)
+
+
 
   return (
     <div style={{minWidth:"13vw" , width: "13vw",  background:"#fff" , height:"100vh" , position:"fixed",  }}>
 
      {sidebar.map((data , index) => (
 
-        <div key={index} style={{position:"relative" , marginBottom: "20px" , background: isHovered ? '#ddebf0' : "transparent", marginTop:"20px", padding: "5px 10px", borderRight: isHovered ? "5px solid #e6be63" : "none"}}
-          onMouseEnter={() => handleMouseEnter(index)}
-          onMouseLeave={handleMouseLeave}
+        <div key={index} style={{position:"relative" , marginBottom: "20px" ,
+      background: isHovered === index ? '#ddebf0' : "#fff",
+      borderRight: isHovered === index ? "5px solid #e6be63" : "5px solid transparent" ,
+          marginTop:"20px", 
+          padding: "5px 10px",
+        }}
+        onMouseEnter={() => setIsHovered(index)}
+        onMouseLeave={() => setIsHovered(false)}
         >
             <Link to={data.path} style={{textDecoration:"none"}}>
             <h6 className='para'>{data.name}</h6>

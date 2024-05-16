@@ -16,7 +16,7 @@ return (
     <div>
     <nav class="navbar bg-body-tertiary" style={{background: "#2f354d"}}>
     <div class="container-fluid">
-      <a href='/' class="navbar-brand">Navbars</a>
+      <a href='/' class="navbar-brand">Navbar</a>
       <form class="d-flex" role="search">
        
         <button onClick={handleLogout} class="btn btn-success" type="submit">Logout</button>
