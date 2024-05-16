@@ -15,7 +15,7 @@ function CustomAppBar() {
 
  
   const shouldShowAppBar = () => {
-    const publicRoutes = ['/', '/forgot-password', '/resetpassword', '/signup'];
+    const publicRoutes = ['/', '/forgot-password', '/reset-password', '/signup'];
     return !publicRoutes.includes(location.pathname);
   };
 
@@ -35,7 +35,7 @@ function App() {
         <Routes >
           <Route path="/" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/resetpassword/:id/:token" element={<ResetPassword />} />
+          <Route path="/reset-password/:id/:token" element={<ResetPassword />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/store-list" element={<StoreList />} />
