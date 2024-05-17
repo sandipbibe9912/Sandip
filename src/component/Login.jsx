@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setToken, setUser } from "../Redux/authSlice";
 const Login = () => {
   
   const user = {
@@ -15,7 +17,7 @@ const Login = () => {
   const {name , value} = e.target
   setFormData({...formData , [name] : value})
  }
-
+const dispatch = useDispatch()
  const navigate = useNavigate()
 
  const handleLogin = (e) => {
@@ -29,8 +31,12 @@ const Login = () => {
           navigate('/dashboard')
           console.log(response)
 
-          localStorage.setItem("user" , JSON.stringify(response.data.user))
+          localStorage.setItem("user" , JSON.stringify(response.data))
           localStorage.setItem("token" , response.data.token)
+   
+          dispatch(setUser(response.data.user))
+          dispatch(setToken(response.data.token))
+          
         }else{
          
           alert(response.data.msg)

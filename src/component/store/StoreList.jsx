@@ -1,16 +1,22 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { faTrash , faPenToSquare} from "@fortawesome/free-solid-svg-icons";
+import { Link } from 'react-router-dom';
 
 const StoreList = () => {
 
+  const storeId = useSelector(state => state.auth.user._id)
+
     const [storeList , setStoreList] = useState([])
     const fetchData = async() => {
-   
-     await axios.get('https://sandip-node-4.onrender.com/api/getall')
+    console.log("storeId" , storeId)
+     await axios.get(`https://sandip-node-4.onrender.com/api/store/findbyAdminId/${storeId}`)
      .then((response) => {
 
         console.log(response.data)
-        setStoreList(response.data.data)
+        setStoreList(response.data)
      })
 
     }
@@ -18,6 +24,9 @@ const StoreList = () => {
    useEffect(() => {
     fetchData()
    }, [])
+
+
+
 
 
    const bgcolor = [
@@ -40,6 +49,18 @@ const StoreList = () => {
       color : 'table-info',
     },
    ]
+
+   const handleDelete = async(storeId) => {
+       console.log(storeId)
+         await axios.delete(`https://sandip-node-4.onrender.com/api/store/delete/${storeId}`)
+         .then((response) => {
+            alert(response.data.msg)
+            fetchData()
+         }).catch((error) => {
+          alert(error.response.data.msg)
+         })
+
+   }
   return (
     <div className='container'>
     <div className='row justify-content-center align-items-center mt-5'>
@@ -52,18 +73,30 @@ const StoreList = () => {
       <th scope="col">id</th>
       <th scope="col">name</th>
       <th scope="col">email</th>
-      <th scope="col">tc</th>
+      <th scope="col">Created Date</th>
+      <th scope="col">Delete</th>
+      <th scope="col">Update</th>
     </tr>
   </thead>
   {storeList.map((store , index) => (
 
   
   <tbody key={index}>
-     <tr  className={bgcolor[index % bgcolor.length].color}>
+     <tr >
       <th scope="row">{store._id}</th>
-      <td>{store.name}</td>
-      <td>{store.email}</td>
-      <td>{store.tc}</td>
+      <td>{store.storeName}</td>
+      <td>{store.storeEmail}</td>
+      <td>{store.createdDate}</td>
+      <td>
+        <div onClick={() => handleDelete(store._id)}>
+        <FontAwesomeIcon icon={faTrash} />
+        </div>
+      </td>
+      <td>
+        <Link to={`/update-store/${store._id}`} >
+      <FontAwesomeIcon icon={faPenToSquare} />
+      </Link>
+      </td>
     </tr>
    
   </tbody>

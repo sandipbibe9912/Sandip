@@ -1,35 +1,48 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 const Sidebar = () => {
 
-  const sidebar = [ 
+  const role = useSelector(state => state.auth.user.roles);
+  const [isHovered, setIsHovered] = useState(null);
 
-   {
-    id: 1,
-    name: "Add Store",
-    path: "/add-store"
-   },
-   {
-    id: 2,
-    name: "Store List",
-    path: "/store-list"
-   },
-   {
-    id: 3,
-    name: "Add User",
-    path: "/add-user"
-   },
-   {
-    id: 4,
-    name: "User List",
-    path: "/user-list"
-   },
+  const adminSidebar = [
+    {
+      id: 1,
+      name: "Add Store",
+      path: "/add-store"
+    },
+    {
+      id: 2,
+      name: "Store List",
+      path: "/store-list"
+    }
+  ];
+
+  const storeAdminSidebar = [
+    {
+      id: 1,
+      name: "Add User",
+      path: "/add-user"
+    },
+    {
+      id: 2,
+      name: "User List",
+      path: "/user-list"
+    }
+  ];
 
 
-  ]
-  
- const [isHovered , setIsHovered] = useState(false)
+let sidebar = [];
+  // const sidebar = role === 'ROLE_ADMIN' ? adminSidebar : role === 'ROLE_STORE_ADMIN' ? storeAdminSidebar : [];
+
+  if(role.includes('ROLE_ADMIN')) {
+    sidebar = adminSidebar;
+  } else if(role.includes('ROLE_STORE_ADMIN')) {
+    sidebar = storeAdminSidebar;
+  }
+
 
 
 

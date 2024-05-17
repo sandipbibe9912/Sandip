@@ -7,7 +7,9 @@ import ResetPassword from './component/ResetPassword';
 import Signup from './component/Signup';
 import Dashboard from './component/Dashboard';
 import "./App.css"
-import StoreList from './component/StoreList';
+import StoreList from './component/store/StoreList';
+import AddStore from './component/store/addStore';
+import UpdateStore from './component/store/UpdateStore';
 
 
 function CustomAppBar() {
@@ -39,6 +41,8 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/store-list" element={<StoreList />} />
+          <Route path="/add-store" element={<AddStore />} />
+          <Route path="/update-store/:id" element={<UpdateStore />} />
         </Routes>
       </div>
       </div>
